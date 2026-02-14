@@ -970,6 +970,314 @@
       margin-bottom: 10px;
     }
 
+    /* ── GALLERY SLIDER ── */
+    .slider-section {
+      padding: 80px 0;
+      background: var(--deep);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slider-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(255, 107, 0, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .slider-header {
+      text-align: center;
+      margin-bottom: 44px;
+      padding: 0 5%;
+    }
+
+    .slider-header .section-badge {
+      color: var(--gold-light);
+    }
+
+    .slider-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .slider-header h2 span {
+      color: var(--saffron-light);
+    }
+
+    .slider-header p {
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    /* Track wrapper with fade edges */
+    .slider-outer {
+      position: relative;
+    }
+
+    .slider-outer::before,
+    .slider-outer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .slider-outer::before {
+      left: 0;
+      background: linear-gradient(to right, var(--deep), transparent);
+    }
+
+    .slider-outer::after {
+      right: 0;
+      background: linear-gradient(to left, var(--deep), transparent);
+    }
+
+    /* Arrow buttons — sit outside track, anchored to slider-section */
+    .slider-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 0 5%;
+    }
+
+    .slider-arrow {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--saffron);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(255, 107, 0, 0.5);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      pointer-events: all;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .slider-arrow:hover {
+      background: var(--saffron-light);
+      transform: scale(1.12);
+      box-shadow: 0 6px 28px rgba(255, 107, 0, 0.75);
+    }
+
+    .slider-arrow:active {
+      transform: scale(0.94);
+      background: var(--saffron-dark);
+    }
+
+    /* The scrollable track */
+    .slider-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Firefox */
+      padding: 10px 5% 20px;
+      cursor: grab;
+    }
+
+    .slider-track:active {
+      cursor: grabbing;
+    }
+
+    .slider-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Individual slide cards */
+    .slide-card {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 320px;
+      height: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      border: 1.5px solid rgba(255, 107, 0, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: #2a1000;
+    }
+
+    .slide-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 50px rgba(255, 107, 0, 0.25);
+      border-color: rgba(255, 107, 0, 0.4);
+    }
+
+    /* Placeholder slide styles (before real images) */
+    .slide-card .slide-bg {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-card .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .slide-card:hover .slide-img {
+      transform: scale(1.05);
+    }
+
+    /* Overlay label at bottom */
+    .slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(20, 5, 0, 0.92) 0%, transparent 100%);
+      padding: 24px 20px 20px;
+    }
+
+    .slide-tag {
+      display: inline-block;
+      background: var(--saffron);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+    }
+
+    .slide-overlay h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .slide-overlay p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.82rem;
+    }
+
+    /* Placeholder card visuals (when no real images) */
+    .slide-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .slide-placeholder .ph-icon {
+      font-size: 4rem;
+      opacity: 0.7;
+    }
+
+    .slide-placeholder .ph-label {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.82rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Dot indicators */
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 0 5%;
+    }
+
+    .slider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+    }
+
+    .slider-dot.active {
+      background: var(--saffron);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Upload hint box */
+    .slider-upload-hint {
+      text-align: center;
+      margin-top: 24px;
+      padding: 14px 20px;
+      background: rgba(255, 107, 0, 0.06);
+      border: 1px dashed rgba(255, 107, 0, 0.3);
+      border-radius: 12px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    .slider-upload-hint span {
+      color: var(--saffron-light);
+      font-weight: 600;
+    }
+
+    /* ── RESPONSIVE for Slider ── */
+    @media (max-width: 900px) {
+      .slide-card {
+        width: 280px;
+        height: 370px;
+      }
+
+      .slider-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .slide-card {
+        width: 250px;
+        height: 340px;
+      }
+
+      .slider-header h2 {
+        font-size: 1.7rem;
+      }
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--deep);
@@ -1224,6 +1532,7 @@
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#about">Why Us</a></li>
       <li><a href="#book" class="nav-cta">📞 Book Now</a></li>
     </ul>
@@ -1275,9 +1584,9 @@
         <div class="quick-contact">
           <a href="tel:+919792223337">
             <span class="icon">📞</span>
-            +91 97922 23337 — Call Directly
+            — Call us Directly
           </a>
-          <a href="https://wa.me/919792223337" target="_blank">
+          <a href="https://wa.me/917054431143" target="_blank">
             <span class="icon">💬</span>
             WhatsApp Us Anytime
           </a>
@@ -1565,6 +1874,162 @@
     </div>
   </section>
 
+  <!-- GALLERY SLIDER -->
+  <section class="slider-section" id="gallery">
+    <div class="slider-header">
+      <div class="section-badge">📸 Gallery & Offers</div>
+      <h2>Experiences & <span>Special Deals</span></h2>
+      <p>Swipe to explore pilgrim moments, sacred sites & exclusive travel offers</p>
+    </div>
+
+    <div class="slider-outer">
+      <div class="slider-track" id="sliderTrack">
+
+        <!-- SLIDE 1: Experience -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #3D1500, #6B2A00);">
+            <span class="ph-icon">🛕</span>
+            <span class="ph-label">Add your Ram Mandir photo here</span>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Experience</span>
+            <h4>Ram Mandir Darshan</h4>
+            <p>Divine blessings at the grand Ram Mandir, Ayodhya</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Discount Poster -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #CC4400, #FF6B00);">
+            <span class="ph-icon">🎉</span>
+            <div style="text-align:center; padding: 0 20px;">
+              <div
+                style="font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:#fff; line-height:1.1; margin-bottom:8px;">
+                20% OFF</div>
+              <div style="color:rgba(255,255,255,0.85); font-size:1rem; font-weight:600;">Taxi + Guide Package</div>
+              <div style="color:rgba(255,255,255,0.6); font-size:0.8rem; margin-top:6px;">Book before March 31</div>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Special Offer</span>
+            <h4>Season Discount — 20% Off</h4>
+            <p>Combo Taxi + Guide package at unbeatable price</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: Experience -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #1A3A00, #2D6000);">
+            <span class="ph-icon">🌊</span>
+            <span class="ph-label">Add your Saryu Ghat photo here</span>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Experience</span>
+            <h4>Saryu Ghat Evening Aarti</h4>
+            <p>Witness the breathtaking river aarti at sunset</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: Informational Poster -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #1A0A2E, #2D1060);">
+            <span class="ph-icon">✈️</span>
+            <div style="text-align:center; padding: 0 20px;">
+              <div
+                style="font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:#fff; line-height:1.3; margin-bottom:10px;">
+                Airport to Ayodhya</div>
+              <div style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.6;">✓ Lucknow (LKO)<br />✓
+                Ayodhya (AYJ)<br />✓ Meet & Greet<br />✓ Fixed Pricing</div>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Service Info</span>
+            <h4>Seamless Airport Transfers</h4>
+            <p>From both Lucknow & Ayodhya airports</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: Experience -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #3D2A00, #7A5000);">
+            <span class="ph-icon">🐒</span>
+            <span class="ph-label">Add your Hanumangarhi photo here</span>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Experience</span>
+            <h4>Hanumangarhi Blessings</h4>
+            <p>Sacred fort-temple of Lord Hanuman</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 6: Promo Poster -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #7A0000, #CC0000);">
+            <span class="ph-icon">👨‍👩‍👧‍👦</span>
+            <div style="text-align:center; padding: 0 20px;">
+              <div
+                style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:#fff; line-height:1.3; margin-bottom:10px;">
+                Family Yatra Package</div>
+              <div style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.7;">✓ AC Cab for 6<br />✓
+                Expert Guide Included<br />✓ All Major Temples<br />✓ Best Price Guaranteed</div>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Package</span>
+            <h4>Family Yatra — All Inclusive</h4>
+            <p>Cab + Guide + 10 temples in one day</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 7: Experience -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #002040, #004080);">
+            <span class="ph-icon">🪔</span>
+            <span class="ph-label">Add your Deepotsav photo here</span>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Festival</span>
+            <h4>Deepotsav — Diwali in Ayodhya</h4>
+            <p>Millions of diyas light up the holy city</p>
+          </div>
+        </div>
+
+        <!-- SLIDE 8: Testimonial Poster -->
+        <div class="slide-card">
+          <div class="slide-placeholder" style="background: linear-gradient(145deg, #0A2A00, #1A5500);">
+            <span class="ph-icon">⭐</span>
+            <div style="text-align:center; padding: 0 24px;">
+              <div style="color:var(--gold-light); font-size:1.1rem; letter-spacing:2px; margin-bottom:12px;">★★★★★
+              </div>
+              <div style="color:rgba(255,255,255,0.85); font-size:0.9rem; line-height:1.7; font-style:italic;">"Best
+                experience in Ayodhya. The guide made Lord Ram's story come alive at every temple!"</div>
+              <div style="color:rgba(255,255,255,0.5); font-size:0.78rem; margin-top:12px;">— Priya R., Chennai</div>
+            </div>
+          </div>
+          <div class="slide-overlay">
+            <span class="slide-tag">Review</span>
+            <h4>Loved by Pilgrims Nationwide</h4>
+            <p>5-star rated on Google & WhatsApp</p>
+          </div>
+        </div>
+
+      </div><!-- end slider-track -->
+    </div><!-- end slider-outer -->
+
+    <div class="slider-arrows">
+      <button class="slider-arrow" id="sliderPrev" aria-label="Previous">&#8592;</button>
+      <button class="slider-arrow" id="sliderNext" aria-label="Next">&#8594;</button>
+    </div>
+
+    <div class="slider-dots" id="sliderDots"></div>
+
+    <div class="slider-upload-hint">
+      💡 <span>To add your own photos:</span> Replace the placeholder slides above with
+      <code style="color:var(--saffron-light);">&lt;img src="your-photo.jpg" class="slide-img"&gt;</code>
+      inside each <code style="color:var(--saffron-light);">.slide-card</code>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-top">
@@ -1596,12 +2061,12 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:+919792223337">📞 +91 70544 31143</a></li>
+          <li><a href="tel:+917054431143">📞 +91 70544 31143</a></li>
           <li><a href="/cdn-cgi/l/email-protection#27444849534644536755464a46494640554e0944484a">✉️ <span
                 class="__cf_email__"
                 data-cfemail="a8cbc7c6dcc9cbdce8dac9c5c9c6c9cfdac186cbc7c5">[email&#160;protected]</span></a></li>
           <li><a href="#">📍 Ayodhya Dham, UP</a></li>
-          <li><a href="https://wa.me/919792223337">💬 WhatsApp Us</a></li>
+          <li><a href="https://wa.me/917054431143">💬 WhatsApp Us</a></li>
         </ul>
       </div>
     </div>
@@ -1614,8 +2079,8 @@
 
   <!-- STICKY CALL FAB -->
   <div class="sticky-call">
-    <a href="https://wa.me/919792223337" class="wa-fab" target="_blank" title="WhatsApp">💬</a>
-    <a href="tel:+919792223337" class="call-fab" title="Call Now">📞</a>
+    <a href="https://wa.me/917054431143" class="wa-fab" target="_blank" title="WhatsApp">💬</a>
+    <a href="tel:+917054431143" class="call-fab" title="Call Now">📞</a>
   </div>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -1646,7 +2111,111 @@
         nav.style.boxShadow = 'none';
       }
     });
+
+    // ── SLIDER LOGIC ──
+    const track = document.getElementById('sliderTrack');
+    const dotsContainer = document.getElementById('sliderDots');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    const cards = track ? Array.from(track.querySelectorAll('.slide-card')) : [];
+    let isDragging = false, startX = 0, scrollStart = 0;
+
+    function getCardWidth() {
+      return cards[0] ? cards[0].offsetWidth + 20 : 340;
+    }
+
+    function scrollByCard(dir) {
+      if (!track) return;
+      track.scrollBy({ left: dir * getCardWidth(), behavior: 'smooth' });
+    }
+
+    // Wire up arrow buttons with proper event listeners (not onclick)
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollByCard(-1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        scrollByCard(1);
+      });
+    }
+
+    // Build dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', () => {
+        const card = cards[i];
+        track.scrollTo({ left: card.offsetLeft - track.offsetLeft - 20, behavior: 'smooth' });
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    // Update active dot on scroll
+    function updateDots() {
+      if (!track) return;
+      const scrollPos = track.scrollLeft + track.clientWidth / 2;
+      let activeIdx = 0;
+      cards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft - track.offsetLeft + card.offsetWidth / 2;
+        if (cardCenter < scrollPos) activeIdx = i;
+      });
+      dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIdx);
+      });
+    }
+
+    if (track) track.addEventListener('scroll', updateDots, { passive: true });
+
+    // Mouse drag to scroll (desktop) — only on track itself, not on arrow buttons
+    if (track) {
+      track.addEventListener('mousedown', e => {
+        // Don't initiate drag if clicking an arrow button
+        if (e.target.closest('.slider-arrow')) return;
+        isDragging = true;
+        startX = e.pageX;
+        scrollStart = track.scrollLeft;
+        track.style.userSelect = 'none';
+        track.style.cursor = 'grabbing';
+      });
+      window.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        const walk = (e.pageX - startX) * 1.4;
+        track.scrollLeft = scrollStart - walk;
+      });
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.userSelect = '';
+        track.style.cursor = 'grab';
+      });
+    }
+
+    // Auto-scroll every 4 seconds
+    let autoSlide = setInterval(() => {
+      if (!isDragging && track) {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+        }
+      }
+    }, 4000);
+
+    // Pause auto-scroll on user interaction
+    if (track) {
+      track.addEventListener('mouseenter', () => clearInterval(autoSlide));
+      track.addEventListener('touchstart', () => clearInterval(autoSlide), { passive: true });
+    }
+
     // Animate cards on scroll
+
+    // Fade-in on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1662,6 +2231,7 @@
       el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       observer.observe(el);
     });
+
   </script>
 </body>
 
